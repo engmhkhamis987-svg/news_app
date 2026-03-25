@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/features/splash/splash_screen.dart';
+import 'package:news_app/core/theme/light_theme.dart';
+import 'package:news_app/features/home/home_screen.dart';
+import 'package:news_app/features/onboarding/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: Color(0XFFC53030),
-        appBarTheme: AppBarThemeData(),
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: SplashScreen(),
+      theme: lightTheme,
+      home: HomeScreen(),
     );
   }
 }
