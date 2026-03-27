@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/theme/light_color.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
@@ -49,14 +50,14 @@ ThemeData lightTheme = ThemeData(
   // ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Color(0XFFC53030),
-      foregroundColor: Color(0XFFFFFCFC),
+      backgroundColor: LightColor.primaryColor,
+      foregroundColor: LightColor.backgroundColor,
       textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
   ),
   textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(foregroundColor: Color(0XFFC53030)),
+    style: TextButton.styleFrom(foregroundColor: LightColor.primaryColor),
   ),
 
   // floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -160,12 +161,13 @@ ThemeData lightTheme = ThemeData(
   //   selectionColor: Colors.grey[300]!,
   //   selectionHandleColor: Colors.black,
   // ),
-  // bottomNavigationBarTheme: BottomNavigationBarThemeData(
-  //   backgroundColor: Color(0XFFF6F7F9),
-  //   type: BottomNavigationBarType.fixed,
-  //   selectedItemColor: Color(0XFF14A662),
-  //   unselectedItemColor: Color(0XFF3A4640),
-  // ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: LightColor.backgroundColor,
+    type: BottomNavigationBarType.fixed,
+    selectedItemColor: LightColor.primaryColor,
+    unselectedItemColor: Color(0XFF363636),
+    showUnselectedLabels: true,
+  ),
   // splashFactory: NoSplash.splashFactory,
   // popupMenuTheme: PopupMenuThemeData(
   //   color: Color(0XFFF6F7F9),
