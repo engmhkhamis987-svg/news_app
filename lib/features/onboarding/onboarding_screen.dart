@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/datasource/local_data/preference_manager.dart';
+import 'package:news_app/features/auth/login_screen.dart';
 import 'package:news_app/features/onboarding/controller/onboarding_controller.dart';
 import 'package:news_app/features/onboarding/models/onboarding_model.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +8,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
+  void _onFinishOnboarding(BuildContext context) async {
+    await PreferencesManager().setBool("onboarding_completed", true);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +24,7 @@ class OnboardingScreen extends StatelessWidget {
         final controller = context.read<OnboardingController>();
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: const Color(0XFFF5F5F5),
             actions: [
               Consumer<OnboardingController>(
@@ -22,7 +32,9 @@ class OnboardingScreen extends StatelessWidget {
                   return value.isLastPage
                       ? SizedBox()
                       : TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            _onFinishOnboarding(context);
+                          },
                           label: const Text(
                             "Skip",
                             style: TextStyle(fontSize: 16),
@@ -109,6 +121,10 @@ class OnboardingScreen extends StatelessWidget {
                   builder: (context, OnboardingController value, child) {
                     return ElevatedButton(
                       onPressed: () {
+                        if (value.isLastPage) {
+                          _onFinishOnboarding(context);
+                          return;
+                        }
                         controller.pageController.nextPage(
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeInOut,

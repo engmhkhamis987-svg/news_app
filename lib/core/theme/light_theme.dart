@@ -50,14 +50,14 @@ ThemeData lightTheme = ThemeData(
   // ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: LightColor.primaryColor,
-      foregroundColor: LightColor.backgroundColor,
+      backgroundColor: Color(0XFFC53030),
+      foregroundColor: Color(0XFFFFFCFC),
       textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
   ),
   textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(foregroundColor: LightColor.primaryColor),
+    style: TextButton.styleFrom(foregroundColor: Color(0XFFC53030)),
   ),
 
   // floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -112,33 +112,33 @@ ThemeData lightTheme = ThemeData(
   //   labelMedium: TextStyle(color: Colors.black, fontSize: 16),
   //   labelLarge: TextStyle(color: Colors.black, fontSize: 24),
   // ),
-  // inputDecorationTheme: InputDecorationTheme(
-  //   filled: true,
-  //   fillColor: Color(0XFFFFFFFF),
-  //   hintStyle: TextStyle(color: Color(0XFF9E9E9E)),
-  //   border: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Color(0XFFD1DAD6), width: 0.5),
-  //   ),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: Color(0XFFFFFFFF),
+    hintStyle: TextStyle(color: Color(0XFF9E9E9E)),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0XFFD1DAD6), width: 0.5),
+    ),
 
-  //   // focusColor: Colors.black,
-  //   enabledBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Color(0XFFD1DAD6), width: 0.5),
-  //   ),
-  //   focusedBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Color(0XFFD1DAD6), width: 0.5),
-  //   ),
-  //   errorBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Colors.red, width: 0.5),
-  //   ),
-  //   focusedErrorBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Colors.red, width: 0.5),
-  //   ),
-  // ),
+    // focusColor: Colors.black,
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0XFFD1DAD6), width: 0.5),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0XFFD1DAD6), width: 0.5),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Colors.red, width: 0.5),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Colors.red, width: 0.5),
+    ),
+  ),
   // checkboxTheme: CheckboxThemeData(
   //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
   //   side: BorderSide(color: Color(0XFFD1DAD6), width: 2),

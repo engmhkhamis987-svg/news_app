@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/datasource/local_data/preference_manager.dart';
-import 'package:news_app/features/login/login_screen.dart';
+import 'package:news_app/features/auth/login_screen.dart';
 import 'package:news_app/features/main/main_screen.dart';
 import 'package:news_app/features/onboarding/onboarding_screen.dart';
 
@@ -27,17 +27,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (!mounted) return;
     if (!onboardingComplete) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const OnboardingScreen()),
       );
     } else if (!isLoggedIn) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(builder: (context) => LoginScreen()),
       );
     } else {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainScreen()),
       );
