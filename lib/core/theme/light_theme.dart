@@ -66,52 +66,51 @@ ThemeData lightTheme = ThemeData(
   //   extendedTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
   //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
   // ),
+  textTheme: TextTheme(
+    displaySmall: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: Color(0XFF141414),
+    ),
+    displayMedium: TextStyle(
+      fontSize: 28,
+      fontWeight: FontWeight.w400,
+      color: Color(0XFF161F1B),
+    ),
+    displayLarge: TextStyle(
+      fontSize: 32,
+      fontWeight: FontWeight.w400,
+      color: Color(0XFF161F1B),
+    ),
 
-  // textTheme: TextTheme(
-  //   displaySmall: TextStyle(
-  //     fontSize: 24,
-  //     fontWeight: FontWeight.w400,
-  //     color: Color(0XFF161F1B),
-  //   ),
-  //   displayMedium: TextStyle(
-  //     fontSize: 28,
-  //     fontWeight: FontWeight.w400,
-  //     color: Color(0XFF161F1B),
-  //   ),
-  //   displayLarge: TextStyle(
-  //     fontSize: 32,
-  //     fontWeight: FontWeight.w400,
-  //     color: Color(0XFF161F1B),
-  //   ),
+    titleSmall: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: Color(0XFF3A4640),
+    ),
 
-  //   titleSmall: TextStyle(
-  //     fontSize: 14,
-  //     fontWeight: FontWeight.w400,
-  //     color: Color(0XFF3A4640),
-  //   ),
-
-  //   titleMedium: TextStyle(
-  //     fontSize: 16,
-  //     fontWeight: FontWeight.w400,
-  //     color: Color(0XFF161F1B),
-  //   ),
-  //   //for done tasks
-  //   titleLarge: TextStyle(
-  //     fontSize: 16,
-  //     fontWeight: FontWeight.w400,
-  //     color: Color(0XFFA0A0A0),
-  //     decoration: TextDecoration.lineThrough,
-  //     decorationColor: Color(0XFF49454F),
-  //     overflow: TextOverflow.ellipsis,
-  //   ),
-  //   labelSmall: TextStyle(
-  //     color: Color(0XFF161F1B),
-  //     fontSize: 20,
-  //     fontWeight: FontWeight.w400,
-  //   ),
-  //   labelMedium: TextStyle(color: Colors.black, fontSize: 16),
-  //   labelLarge: TextStyle(color: Colors.black, fontSize: 24),
-  // ),
+    titleMedium: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: Color(0XFF161F1B),
+    ),
+    //for done tasks
+    titleLarge: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: Color(0XFFA0A0A0),
+      decoration: TextDecoration.lineThrough,
+      decorationColor: Color(0XFF49454F),
+      overflow: TextOverflow.ellipsis,
+    ),
+    labelSmall: TextStyle(
+      color: Color(0XFF161F1B),
+      fontSize: 20,
+      fontWeight: FontWeight.w400,
+    ),
+    labelMedium: TextStyle(color: Colors.black, fontSize: 16),
+    labelLarge: TextStyle(color: Colors.black, fontSize: 24),
+  ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Color(0XFFFFFFFF),

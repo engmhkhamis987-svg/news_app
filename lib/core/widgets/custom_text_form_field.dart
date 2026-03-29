@@ -5,7 +5,7 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     required this.controller,
     required this.title,
-    this.maxLines,
+    this.maxLines = 1,
     this.validator,
     required this.hintText,
     this.isPassword = false,
@@ -13,7 +13,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String title;
   final String hintText;
-  final int? maxLines;
+  final int maxLines;
   final Function(String?)? validator;
   final bool isPassword;
 
@@ -49,7 +49,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           decoration: InputDecoration(
             hintText: widget.hintText,
             border: OutlineInputBorder(),
-            suffix: widget.isPassword
+            suffixIcon: widget.isPassword
                 ? IconButton(
                     onPressed: () => togglePasswordVisibility(),
                     icon: _obscureText
