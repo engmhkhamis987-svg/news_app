@@ -6,15 +6,15 @@ import 'package:news_app/features/search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
-
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
     final List<Widget> screens = [
       HomeScreen(),
       SearchScreen(),
@@ -22,11 +22,10 @@ class _MainScreenState extends State<MainScreen> {
       ProfileScreen(),
     ];
     return Scaffold(
-      body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
+        currentIndex: _currentIndex,
         onTap: (index) {
-          setState(() => currentIndex = index);
+          setState(() => _currentIndex = index);
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -41,6 +40,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
+      body: screens[_currentIndex],
     );
   }
 }

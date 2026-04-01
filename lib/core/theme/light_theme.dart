@@ -167,6 +167,7 @@ ThemeData lightTheme = ThemeData(
     unselectedItemColor: Color(0XFF363636),
     showUnselectedLabels: true,
   ),
+
   // splashFactory: NoSplash.splashFactory,
   // popupMenuTheme: PopupMenuThemeData(
   //   color: Color(0XFFF6F7F9),
@@ -202,4 +203,5 @@ ThemeData lightTheme = ThemeData(
   //     ),
   //   ),
   // ),
+  progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.black),
 );

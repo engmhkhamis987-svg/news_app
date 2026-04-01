@@ -1,13 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/datasource/local_data/preference_manager.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
+import 'package:news_app/features/main/main_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  String? errorMessage;
+  bool isLoading = false;
+
+  void register() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+    await Future.delayed(const Duration(seconds: 2));
+    final String? userEmail = PreferencesManager().getString('user_email');
+    if (userEmail != null && userEmail == emailController.text.trim()) {
+      setState(() {
+        errorMessage = 'Email already exists';
+        isLoading = false;
+      });
+    } else {
+      await PreferencesManager().setString('user_email', emailController.text);
+      await PreferencesManager().setString(
+        'user_pass',
+        passwordController.text,
+      );
+      await PreferencesManager().setBool('is_logged_in', true);
+      setState(() {
+        isLoading = false;
+        errorMessage = null;
+      });
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainScreen()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +124,9 @@ class RegisterScreen extends StatelessWidget {
                   return null;
                 },
               ),
+              const SizedBox(height: 8),
+              if (errorMessage != null)
+                Text(errorMessage!, style: const TextStyle(color: Colors.red)),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
@@ -88,10 +134,12 @@ class RegisterScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      // Handle registration logic here
+                      register();
                     }
                   },
-                  child: const Text("Sign Up"),
+                  child: isLoading
+                      ? const CircularProgressIndicator()
+                      : const Text("Sign Up"),
                 ),
               ),
               const SizedBox(height: 20),

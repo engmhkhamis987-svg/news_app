@@ -1,12 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/datasource/local_data/preference_manager.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
 import 'package:news_app/features/auth/register_screen.dart';
+import 'package:news_app/features/main/main_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  String? errorMessage;
+  bool isLoading = false;
+
+  void login() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+    await Future.delayed(const Duration(seconds: 2));
+    final String? userEmail = PreferencesManager().getString('user_email');
+    final String? userPass = PreferencesManager().getString('user_pass');
+    if (userEmail == null || userPass == null) {
+      setState(() {
+        errorMessage = 'user not found, please register first';
+        isLoading = false;
+      });
+      return;
+    }
+    if (userEmail != emailController.text.trim() ||
+        userPass != passwordController.text) {
+      setState(() {
+        errorMessage = 'Invalid email or password';
+        isLoading = false;
+      });
+      return;
+    }
+    await PreferencesManager().setBool('is_logged_in', true);
+    setState(() {
+      isLoading = false;
+      errorMessage = null;
+    });
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const MainScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +110,9 @@ class LoginScreen extends StatelessWidget {
                   return null;
                 },
               ),
+              const SizedBox(height: 8),
+              if (errorMessage != null)
+                Text(errorMessage!, style: const TextStyle(color: Colors.red)),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
@@ -71,10 +120,12 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      // Handle login logic here
+                      login();
                     }
                   },
-                  child: const Text("Sign In"),
+                  child: isLoading
+                      ? const CircularProgressIndicator()
+                      : const Text("Sign In"),
                 ),
               ),
               const SizedBox(height: 20),
