@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/datasource/remote_data/api_config.dart';
 import 'package:news_app/core/datasource/remote_data/api_service.dart';
+import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
 
 class HomeController extends ChangeNotifier {
-  bool topHeadlinesLoading = true;
-  bool everyThingLoading = true;
+  RequestStatusEnum everyThingStatus = RequestStatusEnum.loading;
+  RequestStatusEnum topHeadlinesStatus = RequestStatusEnum.loading;
+
   List<NewsArticleModel> newsTopHeadlinesList = [];
   List<NewsArticleModel> newsEveryThingList = [];
   ApiService apiService = ApiService();
   String? errorMessage;
+  String? selectedCategory;
 
   HomeController() {
     getTopHeadlines();
@@ -18,18 +21,13 @@ class HomeController extends ChangeNotifier {
 
   void getTopHeadlines() async {
     try {
-      Map<String, dynamic> result = await apiService.get(
-        ApiConfig.topHeadlines,
-        params: {'country': 'us'},
-      );
+      Map<String, dynamic> result = await apiService.get(ApiConfig.topHeadlines, params: {'country': 'us'});
 
-      newsTopHeadlinesList = ((result['articles']) as List)
-          .map((e) => NewsArticleModel.fromJson(e))
-          .toList();
-      topHeadlinesLoading = false;
+      newsTopHeadlinesList = ((result['articles']) as List).map((e) => NewsArticleModel.fromJson(e)).toList();
+      topHeadlinesStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
-      topHeadlinesLoading = false;
+      topHeadlinesStatus = RequestStatusEnum.error;
       errorMessage = e.toString();
     }
     notifyListeners();
@@ -37,19 +35,19 @@ class HomeController extends ChangeNotifier {
 
   void getEveryThing() async {
     try {
-      Map<String, dynamic> result = await apiService.get(
-        ApiConfig.everything,
-        params: {'q': 'bitcoin'},
-      );
-      newsEveryThingList = ((result['articles']) as List)
-          .map((e) => NewsArticleModel.fromJson(e))
-          .toList();
-      everyThingLoading = false;
+      Map<String, dynamic> result = await apiService.get(ApiConfig.everything, params: {'q': 'bitcoin'});
+      newsEveryThingList = ((result['articles']) as List).map((e) => NewsArticleModel.fromJson(e)).toList();
+      everyThingStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
-      everyThingLoading = false;
+      everyThingStatus = RequestStatusEnum.error;
       errorMessage = e.toString();
     }
+    notifyListeners();
+  }
+
+  void updateCategory(String category) {
+    selectedCategory = category;
     notifyListeners();
   }
 }

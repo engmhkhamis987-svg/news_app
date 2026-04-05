@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/datasource/local_data/preference_manager.dart';
 import 'package:news_app/core/theme/light_theme.dart';
-import 'package:news_app/features/auth/login_screen.dart';
 import 'package:news_app/features/main/main_screen.dart';
-import 'package:news_app/features/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //''''''''''''''''''''
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: lightTheme,
-      home: LoginScreen(),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, title: 'Flutter Demo', theme: lightTheme, home: MainScreen());
   }
 }
