@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/theme/light_color.dart';
 
 ThemeData lightTheme = ThemeData(
@@ -37,23 +38,23 @@ ThemeData lightTheme = ThemeData(
   //     return 2.0;
   //   }),
   // ),
-
-  // appBarTheme: AppBarTheme(
-  //   backgroundColor: Color(0XFFF6F7F9),
-  //   titleTextStyle: TextStyle(
-  //     color: Color(0XFF161F1B),
-  //     fontSize: 20,
-  //     fontWeight: FontWeight.w400,
-  //   ),
-  //   centerTitle: false,
-  //   iconTheme: IconThemeData(color: Color(0xFF161F1B)),
-  // ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Color(0XFFFFFFFF),
+    titleTextStyle: TextStyle(
+      color: Color(0XFF141414),
+      fontSize: AppSizes.sp16,
+      fontWeight: FontWeight.w700,
+    ),
+    centerTitle: true,
+    // iconTheme: IconThemeData(color: Color(0xFF161F1B)),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: Color(0XFFC53030),
       foregroundColor: Color(0XFFFFFCFC),
-      textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+      textStyle: TextStyle(fontSize: AppSizes.sp16, fontWeight: FontWeight.w400),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      minimumSize: Size(double.infinity, AppSizes.h56),
     ),
   ),
   textButtonTheme: TextButtonThemeData(
@@ -68,35 +69,35 @@ ThemeData lightTheme = ThemeData(
   // ),
   textTheme: TextTheme(
     displaySmall: TextStyle(
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
       color: Color(0XFF141414),
     ),
     displayMedium: TextStyle(
-      fontSize: 28,
+      fontSize: AppSizes.sp28,
       fontWeight: FontWeight.w400,
       color: Color(0XFF161F1B),
     ),
     displayLarge: TextStyle(
-      fontSize: 32,
+      fontSize: AppSizes.sp32,
       fontWeight: FontWeight.w400,
       color: Color(0XFF161F1B),
     ),
 
     titleSmall: TextStyle(
-      fontSize: 14,
+      fontSize: AppSizes.sp14,
       fontWeight: FontWeight.w400,
       color: Color(0XFF3A4640),
     ),
 
     titleMedium: TextStyle(
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
       color: Color(0XFF161F1B),
     ),
     //for done tasks
     titleLarge: TextStyle(
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
       color: Color(0XFFA0A0A0),
       decoration: TextDecoration.lineThrough,
@@ -105,11 +106,11 @@ ThemeData lightTheme = ThemeData(
     ),
     labelSmall: TextStyle(
       color: Color(0XFF161F1B),
-      fontSize: 20,
+      fontSize: AppSizes.sp20,
       fontWeight: FontWeight.w400,
     ),
-    labelMedium: TextStyle(color: Colors.black, fontSize: 16),
-    labelLarge: TextStyle(color: Colors.black, fontSize: 24),
+    labelMedium: TextStyle(color: Colors.black, fontSize: AppSizes.sp16),
+    labelLarge: TextStyle(color: Colors.black, fontSize: AppSizes.sp24),
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,

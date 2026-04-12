@@ -1,35 +1,24 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:news_app/core/extensions/date_time_extension.dart';
 import 'package:news_app/core/theme/light_color.dart';
-import 'package:news_app/features/home/categories_screen.dart';
-import 'package:news_app/features/home/components/view_all_component.dart';
+import 'package:news_app/core/widgets/custom_cached_network_image.dart';
+import 'package:news_app/features/home/components/news_item.dart';
 import 'package:news_app/features/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
-class CategoryList extends StatelessWidget {
-  CategoryList({super.key});
+class CategoriesScreen extends StatelessWidget {
+  CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Consumer<HomeController>(
+    return Scaffold(
+      appBar: AppBar(title: Text('Categories')),
+      body: Consumer<HomeController>(
         builder: (context, controller, child) {
           return Column(
             children: [
-              ViewAllComponent(
-                title: 'Categories',
-                titleColor: Color(0XFF141414),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext _) => ChangeNotifierProvider.value(
-                        value: Provider.of<HomeController>(context, listen: false),
-                        child: CategoriesScreen(),
-                      ),
-                    ),
-                  );
-                },
-              ),
               Padding(
                 padding: const EdgeInsets.only(top: 16, left: 16, bottom: 4),
                 child: SizedBox(
@@ -64,6 +53,15 @@ class CategoryList extends StatelessWidget {
                       return SizedBox(width: 16);
                     },
                   ),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: controller.newsTopHeadlinesList.length,
+                  itemBuilder: (context, index) {
+                    final model = controller.newsTopHeadlinesList[index];
+                    return NewsItem(model: model);
+                  },
                 ),
               ),
             ],

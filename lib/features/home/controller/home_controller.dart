@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/datasource/remote_data/api_config.dart';
-import 'package:news_app/core/datasource/remote_data/api_service.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
+import 'package:news_app/features/home/repos/news_repositry.dart';
 
 class HomeController extends ChangeNotifier {
   RequestStatusEnum everyThingStatus = RequestStatusEnum.loading;
@@ -10,11 +9,11 @@ class HomeController extends ChangeNotifier {
 
   List<NewsArticleModel> newsTopHeadlinesList = [];
   List<NewsArticleModel> newsEveryThingList = [];
-  ApiService apiService = ApiService();
+  BaseNewsRepositry newsRepositry;
   String? errorMessage;
   String selectedCategory = 'business';
 
-  HomeController() {
+  HomeController(this.newsRepositry) {
     getTopHeadlines();
     getEveryThing();
   }
@@ -22,12 +21,8 @@ class HomeController extends ChangeNotifier {
   void getTopHeadlines() async {
     topHeadlinesStatus = RequestStatusEnum.loading;
     try {
-      Map<String, dynamic> result = await apiService.get(
-        ApiConfig.topHeadlines,
-        params: {'country': 'us', 'category': selectedCategory.toLowerCase()},
-      );
+      newsTopHeadlinesList = await newsRepositry.getTopHeadlines(selectedCategory: selectedCategory);
 
-      newsTopHeadlinesList = ((result['articles']) as List).map((e) => NewsArticleModel.fromJson(e)).toList();
       topHeadlinesStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
@@ -39,8 +34,7 @@ class HomeController extends ChangeNotifier {
 
   void getEveryThing() async {
     try {
-      Map<String, dynamic> result = await apiService.get(ApiConfig.everything, params: {'q': 'bitcoin'});
-      newsEveryThingList = ((result['articles']) as List).map((e) => NewsArticleModel.fromJson(e)).toList();
+      newsEveryThingList = await newsRepositry.getEveryThing();
       everyThingStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {

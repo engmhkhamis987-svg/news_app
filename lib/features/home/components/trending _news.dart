@@ -7,7 +7,6 @@ import 'package:news_app/features/home/components/trending_news_shimmer.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
 import 'package:news_app/features/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 class TrendingNews extends StatelessWidget {
   const TrendingNews({super.key});
@@ -30,7 +29,11 @@ class TrendingNews extends StatelessWidget {
                 children: [
                   Text(
                     'NEWST',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: LightColor.primaryColor),
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: LightColor.primaryColor,
+                    ),
                   ),
                   SizedBox(height: 6),
                   ViewAllComponent(title: 'Trending News', onTap: () {}),
@@ -43,7 +46,9 @@ class TrendingNews extends StatelessWidget {
                           case RequestStatusEnum.loading:
                             return TrendingNewsShimmer();
                           case RequestStatusEnum.error:
-                            return Center(child: Text(controller.errorMessage ?? 'An error occurred'));
+                            return Center(
+                              child: Text(controller.errorMessage ?? 'An error occurred'),
+                            );
                           case RequestStatusEnum.loaded:
                             return ListView.separated(
                               padding: const EdgeInsets.only(left: 16),
@@ -57,7 +62,11 @@ class TrendingNews extends StatelessWidget {
                                   child: Stack(
                                     children: [
                                       // Image.network(model.urlToImage!, width: 240),
-                                      CustomCachedNetworkImage(imageUrl: model.urlToImage, width: 240, height: 140),
+                                      CustomCachedNetworkImage(
+                                        imageUrl: model.urlToImage,
+                                        width: 240,
+                                        height: 140,
+                                      ),
 
                                       Positioned.fill(
                                         child: Container(
@@ -94,7 +103,9 @@ class TrendingNews extends StatelessWidget {
                                             Row(
                                               children: [
                                                 CircleAvatar(
-                                                  backgroundImage: NetworkImage(model.urlToImage),
+                                                  backgroundImage: NetworkImage(
+                                                    model.urlToImage,
+                                                  ),
                                                   radius: 12,
                                                 ),
                                                 SizedBox(width: 6),
