@@ -4,7 +4,7 @@ import 'package:news_app/features/home/components/category_list.dart';
 import 'package:news_app/features/home/components/top_headlines.dart';
 import 'package:news_app/features/home/components/trending%20_news.dart';
 import 'package:news_app/features/home/controller/home_controller.dart';
-import 'package:news_app/features/home/repos/news_repositry.dart';
+import 'package:news_app/core/repos/news_repositry.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {

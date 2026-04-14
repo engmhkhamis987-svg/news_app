@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
+import 'package:news_app/core/mixins/safe_notify_mixin.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
-import 'package:news_app/features/home/repos/news_repositry.dart';
+import 'package:news_app/core/repos/news_repositry.dart';
 
-class HomeController extends ChangeNotifier {
+class HomeController extends ChangeNotifier with SafeNotify {
   RequestStatusEnum everyThingStatus = RequestStatusEnum.loading;
   RequestStatusEnum topHeadlinesStatus = RequestStatusEnum.loading;
 
@@ -29,7 +30,7 @@ class HomeController extends ChangeNotifier {
       topHeadlinesStatus = RequestStatusEnum.error;
       errorMessage = e.toString();
     }
-    notifyListeners();
+    safeNotify();
   }
 
   void getEveryThing() async {
@@ -41,12 +42,12 @@ class HomeController extends ChangeNotifier {
       everyThingStatus = RequestStatusEnum.error;
       errorMessage = e.toString();
     }
-    notifyListeners();
+    safeNotify();
   }
 
   void updateCategory(String category) {
     selectedCategory = category;
     getTopHeadlines();
-    notifyListeners();
+    safeNotify();
   }
 }

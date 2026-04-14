@@ -63,7 +63,7 @@ class PreferencesManager {
     return await _preferences.remove(key);
   }
 
-  Future<bool> clear(String key) async {
+  Future<bool> clear() async {
     return await _preferences.clear();
   }
 }
