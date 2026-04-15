@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/datasource/remote_data/api_service.dart';
 import 'package:news_app/core/repos/news_repositry.dart';
+import 'package:news_app/features/details/news_detail_screen.dart';
 import 'package:news_app/features/search/search_screen_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,11 @@ class SearchScreen extends StatelessWidget {
                     },
                     decoration: InputDecoration(
                       hintText: "Search",
-                      suffixIcon: Icon(Icons.search, color: Color(0XFFA0A0A0), size: AppSizes.r30),
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: Color(0XFFA0A0A0),
+                        size: AppSizes.r30,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -39,11 +44,22 @@ class SearchScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final model = controller.newsEveryThingList[index];
                         return ListTile(
-                          leading: Icon(Icons.search, color: Color(0XFFA0A0A0), size: AppSizes.r24),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => NewsDetailScreen(model: model),
+                            ),
+                          ),
+                          leading: Icon(
+                            Icons.search,
+                            color: Color(0XFFA0A0A0),
+                            size: AppSizes.r24,
+                          ),
                           title: Text(model.title),
                         );
                       },
-                      separatorBuilder: (context, index) => Divider(color: Color(0XFFA0A0A0)),
+                      separatorBuilder: (context, index) =>
+                          Divider(color: Color(0XFFA0A0A0)),
                     ),
                   ),
                 ],

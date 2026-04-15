@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
@@ -16,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ProfileController(),
+      create: (_) => ProfileController()..getUserName(),
       child: Scaffold(
         appBar: AppBar(title: Text('Profile')),
 
@@ -55,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(height: AppSizes.ph8),
                     Text(
-                      PreferencesManager().getString('user_name') ?? 'user name',
+                      controller.userName,
                       style: TextStyle(fontSize: AppSizes.sp16, fontWeight: FontWeight.w400, color: Color(0xFF161F1B)),
                     ),
                     SizedBox(height: AppSizes.ph24),
@@ -85,7 +86,15 @@ class ProfileScreen extends StatelessWidget {
                       });
                     }),
                     _buildProfileItem('Language', Icons.language, () {}),
-                    _buildProfileItem('Country', Icons.flag_outlined, () {}),
+                    _buildProfileItem(controller.countryName ?? ' Country', Icons.flag_outlined, () {
+                      showCountryPicker(
+                        context: context,
+                        onSelect: (Country country) {
+                          controller.saveCountry(country);
+                          print('Select country: ${country.displayName}');
+                        },
+                      );
+                    }),
                     _buildProfileItem('Terms & Conditions', Icons.description_outlined, () {}),
                     _buildProfileItem(
                       'Logout',
